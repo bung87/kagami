@@ -29,12 +29,7 @@ def main():
     backup()
     processing_mirrors(settings)
     processing_profiles(settings)
-    if __name__ == '__main__':
-        print '__main__'
-        save(settings,settings_path+'2')
-    else:
-        print __name__
-        save(settings,settings_path)
+    save(settings,settings_path)
 
 # parse osc_main_mirror xml
 def parse_osc_main_mirror():
