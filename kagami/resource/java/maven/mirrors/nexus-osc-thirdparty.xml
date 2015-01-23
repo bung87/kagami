@@ -1,0 +1,6 @@
+<mirror>
+    <id>nexus-osc-thirdparty</id>
+    <mirrorOf>thirdparty</mirrorOf>
+    <name>Nexus osc thirdparty</name>
+    <url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+</mirror>

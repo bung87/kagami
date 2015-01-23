@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+*.pyc
+/portal/yaml/
+/portal/assets/
+/logs/
+*/local_settings.py
+logs/
+bin/
+.directory
+.idea/
+lib/
+lib64
+include/
