@@ -5,7 +5,7 @@ import textwrap
 import commands
 import settings
 
-apps = ['android','maven','npm','pipy','gem','bundle']
+apps = ['android','maven','npm','pypi','gem','bundle']
 
 parser = argparse.ArgumentParser(prog='./kagami.py',
     formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -38,7 +38,7 @@ for t in ns.forward:
         code,r = commands.getstatusoutput("bash %s" % os.path.join(settings.BASE_DIR,'js','npm','registry.sh') )
         if code != 0:
             raise Exception(r)
-    elif t == 'pipy':
+    elif t == 'pypi':
         passvar = config.copy()
         passvar.update({'f':ns.f})
         execfile(os.path.join(settings.BASE_DIR,'python','pip','repository.py'),config)
