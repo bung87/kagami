@@ -2,7 +2,7 @@ import commands
 import os
 from xml.dom.minidom import parse, parseString,Comment
 import shutil
-
+from kagami.settings import kagami_resources
 
 code,r = commands.getstatusoutput("mvn -v|awk -F ':' '{if($1==\"Maven home\"){print $2}}'")
 if code != 0:
@@ -11,11 +11,9 @@ if code != 0:
 settings_file = 'conf/settings.xml'
 settings_path = os.path.join(r.strip(),settings_file)
 
-resource_dir = globals()['RESOURCE_DIR']
-
-osc_main_mirror_path = os.path.join(resource_dir,'java/maven/mirrors/nexus-osc.xml')
-osc_thirdparty_mirror_path = os.path.join(resource_dir,'java/maven/mirrors/nexus-osc-thirdparty.xml')
-osc_profile_path = os.path.join(resource_dir,'java/maven/profiles/osc.xml')
+osc_main_mirror = kagami_resources.read(os.path.join('java/maven/mirrors/nexus-osc.xml'))
+osc_thirdparty_mirror = kagami_resources.read(os.path.join('java/maven/mirrors/nexus-osc-thirdparty.xml'))
+osc_profile = kagami_resources.read(os.path.join('java/maven/profiles/osc.xml'))
 
 osc_main_mirror_url,\
 osc_thirdparty_mirror_url =\
@@ -33,12 +31,12 @@ def main():
 
 # parse osc_main_mirror xml
 def parse_osc_main_mirror():
-    osc_main_mirror = parse(osc_main_mirror_path)
+    osc_main_mirror = parse(osc_main_mirror)
     return osc_main_mirror.documentElement
 
 # parse osc_thirdparty_mirror xml
 def parse_osc_thirdparty_mirror():
-    osc_thirdparty_mirror = parse(osc_thirdparty_mirror_path)
+    osc_thirdparty_mirror = parse(osc_thirdparty_mirror)
     return osc_thirdparty_mirror.documentElement
 
 def processing_mirrors(settings):
@@ -75,12 +73,12 @@ def processing_profiles(settings):
         if profile_elements:
             raise NotImplementedError
         else:
-            tem_profile = parse( osc_profile_path )
+            tem_profile = parse( osc_profile )
             profiles.appendChild(tem_profile.documentElement)
     else:
         frag = settings.createDocumentFragment()
         tem_profiles = settings.createElement('profiles')
-        tem_profile = parse( osc_profile_path )
+        tem_profile = parse( osc_profile )
         tem_profiles.appendChild(tem_profile.documentElement)
         frag.appendChild(tem_profiles)
         settings.appendChild(frag)

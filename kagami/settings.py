@@ -1,4 +1,4 @@
 import os
-
-BASE_DIR = os.path.dirname(__file__)
-RESOURCE_DIR = os.path.join(BASE_DIR,'resource')
+import zipfile
+dirname = os.path.dirname(__file__)
+kagami_resources = zipfile.ZipFile(os.path.join(dirname,"resources.zip"), "r")

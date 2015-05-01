@@ -30,9 +30,6 @@ if not conf_path:
     if not os.path.exists(basedir):
         os.makedirs(basedir)
 
-resource_dir =  globals()['RESOURCE_DIR']
-temp_conf = os.path.join(resource_dir,'python/pip/pip.conf')
-
 config_parser = RawConfigParser()
 SECTION_NAME = 'global'
 OPTION_NAME = 'index-url'

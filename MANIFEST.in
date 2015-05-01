@@ -1,0 +1,6 @@
+include kagami *.zip
+prune kagami/java
+prune kagami/js
+prune kagami/python
+prune kagami/ruby
+prune kagami/resource
