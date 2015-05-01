@@ -28,15 +28,15 @@
 
 一次解决android sdk manager,maven的问题  
 
-`./kagami.py forward android maven`
+`kagami forward android maven`
 
 指定bundle配置文件绝对路径或者让程序在当前目录查找或用户目录下查找  
 
-`./kagami.py forward bundle -f /yourbundlelocation/.bundle/config`
+`kagami forward bundle -f /yourbundlelocation/.bundle/config`
 
 指定bundle配置文件绝对路径或者让程序在当前虚拟环境下查找或用户目录下查找  
  
-`./kagami.py forward pypi -f /yourpypilocation/pip.conf`
+`kagami forward pypi -f /yourpypilocation/pip.conf`
 
 ##有问题反馈
 
