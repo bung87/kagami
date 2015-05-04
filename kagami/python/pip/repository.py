@@ -34,6 +34,12 @@ config_parser = RawConfigParser()
 SECTION_NAME = 'global'
 OPTION_NAME = 'index-url'
 OPTION_VALUE = 'http://pypi.douban.com/simple/'
+FIND_LINKS_NAME = 'find-links'
+FIND_LINKS_VALUE = '''http://mirrors.aliyun.com/pypi
+    http://pypi.douban.com
+    http://pypi.tuna.tsinghua.edu.cn
+    http://pypi.v2ex.com/'''
+   
 
 with open(conf_path,'w+') as f:
     config_parser.readfp(f)
@@ -41,5 +47,7 @@ with open(conf_path,'w+') as f:
         config_parser.add_section(SECTION_NAME)
     if not config_parser.has_option(SECTION_NAME, OPTION_NAME) or config_parser.get(SECTION_NAME, OPTION_NAME)!=OPTION_VALUE:
         config_parser.set(SECTION_NAME,OPTION_NAME,OPTION_VALUE)
+    if not config_parser.has_option(SECTION_NAME, FIND_LINKS_NAME) or config_parser.get(SECTION_NAME, FIND_LINKS_NAME)!=FIND_LINKS_VALUE:
+        config_parser.set(SECTION_NAME,FIND_LINKS_NAME,FIND_LINKS_VALUE)
     config_parser.write(f) 
 
