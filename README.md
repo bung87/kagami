@@ -35,7 +35,7 @@
 
 `kagami forward bundle -f /yourbundlelocation/.bundle/config`
 
-指定bundle配置文件绝对路径或者让程序在当前虚拟环境下查找或用户目录下查找  
+指定pypi配置文件绝对路径或者让程序在当前虚拟环境下查找或用户目录下查找  
  
 `kagami forward pypi -f /yourpypilocation/pip.conf`
 
