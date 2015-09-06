@@ -1,5 +1,6 @@
 # kagami
-
+## Installation
+`pip install https://github.com/bung87/kagami/archive/0.1dev.zip`
 ##Kagami是什么?
 
 一个简单粗暴的工具
