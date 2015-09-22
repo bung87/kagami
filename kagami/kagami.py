@@ -3,8 +3,8 @@ import os
 import argparse
 import textwrap
 import commands
-
-from settings import kagami_resources
+import zipfile
+import subprocess
 
 apps = ['android','maven','npm','pypi','gem','bundle']
 actions = ['forward','backward']
@@ -30,7 +30,9 @@ def main():
     config = vars(parser.parse_args())
 
     ns = parser.parse_args()
-
+    kagami_resources = None
+    if ns.apps:
+        kagami_resources = zipfile.ZipFile(os.path.join(os.path.dirname(__file__),"resources.zip"), "r")
     for t in ns.apps:
 
         if t == 'maven':
@@ -38,20 +40,25 @@ def main():
         elif t == 'android':
             exec(kagami_resources.read(os.path.join('java','android','sdk.py')),config)
         elif t == 'npm':
-            code,r = commands.getstatusoutput("bash %s" % kagami_resources.read(os.path.join('js','npm','registry.sh')) )
-            if code != 0:
-                raise Exception(r)
+            subprocess.check_output(kagami_resources.read(os.path.join('js','npm','registry.sh')),\
+                stderr=subprocess.STDOUT,
+                shell=True
+             )
         elif t == 'pypi':
             passvar = config.copy()
             passvar.update({'f':ns.f})
             exec(kagami_resources.read(os.path.join('python','pip','repository.py')),config)
         elif t == 'gem':
-             code,r = commands.getstatusoutput("bash %s" % kagami_resources.read(os.path.join('ruby','gem','sources.sh') ))
-             if code != 0:
-                 raise Exception(r)
+             subprocess.check_output(kagami_resources.read(os.path.join('ruby','gem','sources.sh') ),
+                stderr=subprocess.STDOUT,
+                shell=True
+                )
+             
         elif t == 'bundle':
             passvar = config.copy()
             passvar.update({'f':ns.f})
             exec(kagami_resources.read(os.path.join('ruby','bundle','config.py')),passvar)
+    if kagami_resources:
+        kagami_resources.close()
 if __name__ =='__main__':
     main()
