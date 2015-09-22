@@ -40,10 +40,11 @@ def main():
         elif t == 'android':
             exec(kagami_resources.read(os.path.join('java','android','sdk.py')),config)
         elif t == 'npm':
-            subprocess.check_output(kagami_resources.read(os.path.join('js','npm','registry.sh')),\
-                stderr=subprocess.STDOUT,
-                shell=True
-             )
+            with open(os.path.expanduser('~/.bash_profile'),'a') as f:
+                f.write(kagami_resources.read(os.path.join('js','npm','registry.sh')))
+                print('writing alias "cnpm" to your bash profile')
+            print('You may execute commands below for the changes to take effect.')
+            print('alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=$HOME/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=$HOME/.cnpmrc"')
         elif t == 'pypi':
             passvar = config.copy()
             passvar.update({'f':ns.f})
