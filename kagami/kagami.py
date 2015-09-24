@@ -28,7 +28,10 @@ def main():
     # parser_backward.add_argument('backward',action='store',type=str,choices=apps)
 
     config = vars(parser.parse_args())
-
+    sh = os.environ.get('SHELL')
+    sh_profile = '~/.bash_profile'
+    if sh and -1 != sh.find('zsh'):
+        sh_profile = '~/.zprofile'
     ns = parser.parse_args()
     kagami_resources = None
     if ns.apps:
@@ -40,10 +43,10 @@ def main():
         elif t == 'android':
             exec(kagami_resources.read(os.path.join('java','android','sdk.py')),config)
         elif t == 'npm':
-            with open(os.path.expanduser('~/.bash_profile'),'a') as f:
+            with open(os.path.expanduser(sh_profile),'a') as f:
                 f.write(kagami_resources.read(os.path.join('js','npm','registry.sh')))
-                print('writing alias "cnpm" to your bash profile')
-            print('You may execute commands below for the changes to take effect.')
+                print('writing alias "cnpm" to your shell profile')
+            print('You may execute commands below for the changes to take effect immediately.')
             print('alias cnpm="npm --registry=https://registry.npm.taobao.org --cache=$HOME/.npm/.cache/cnpm --disturl=https://npm.taobao.org/dist --userconfig=$HOME/.cnpmrc"')
         elif t == 'pypi':
             passvar = config.copy()
