@@ -20,7 +20,7 @@
 
 * android sdk manager：简单粗暴地在hosts文件里增加一行使dl-ssl.google.com解析到国内镜像
 * maven：maven配置文件里增加oschina镜像配置
-* pypi：pypi配置文件里index-url设置为<http://pypi.douban.com/simple/>
+* pypi：pypi配置文件里index-url设置为<https://pypi.tuna.tsinghua.edu.cn/simple>
 * gem：使用<https://ruby.taobao.org/>源
 * bundle：bundle配置文件里增加<https://ruby.taobao.org/>镜像
 * npm:设置别名cnpm 安装源和发布地址均使用淘宝提供的地址
